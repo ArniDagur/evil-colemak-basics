@@ -63,61 +63,22 @@ rotated; see evil-colemak-basics-rotate-t-f-j."
   "Initialise the keymap baset on the current configuration."
   (let ((keymap (make-sparse-keymap)))
     (evil-define-key '(motion normal visual) keymap
-      "n" 'evil-next-line
-      "gn" 'evil-next-visual-line
-      "gN" 'evil-next-visual-line
-      "e" 'evil-previous-line
-      "ge" 'evil-previous-visual-line
-      "E" 'evil-lookup
-      "i" 'evil-forward-char
-      "j" 'evil-forward-word-end
-      "J" 'evil-forward-WORD-end
-      "gj" 'evil-backward-word-end
-      "gJ" 'evil-backward-WORD-end
-      "k" 'evil-search-next
-      "K" 'evil-search-previous
-      "gk" 'evil-next-match
-      "gK" 'evil-previous-match
-      "zi" 'evil-scroll-column-right
-      "zI" 'evil-scroll-right)
-    (evil-define-key '(normal visual) keymap
-      "l" 'undo-tree-undo
-      "N" 'evil-join
-      "gN" 'evil-join-whitespace)
-    (evil-define-key 'normal keymap
-      "u" 'evil-insert
-      "U" 'evil-insert-line)
-    (evil-define-key 'visual keymap
-      "U" 'evil-insert)
-    (evil-define-key '(visual operator) keymap
-      "u" evil-inner-text-objects-map)
+      "u" 'evil-previous-visual-line
+      "e" 'evil-next-visual-line
+      "a" 'evil-backward-char
+      "o" 'evil-forward-char
+      (kbd "M-u") 'evil-open-above
+      (kbd "M-e") 'evil-open-below
+      (kbd "M-a") 'evil-insert
+      (kbd "M-o") 'evil-append
+      "f" 'evil-backward-word-begin
+      "b" 'evil-forward-word-begin
+      "F" 'evil-beginning-of-line
+      "B" 'evil-end-of-line
+      (kbd "M-f") 'evil-insert-line
+      (kbd "M-b") 'evil-append-line)
     (evil-define-key 'operator keymap
-      "i" 'evil-forward-char)
-    (when evil-colemak-basics-rotate-t-f-j
-      (evil-define-key '(motion normal visual) keymap
-        "f" 'evil-forward-word-end
-        "F" 'evil-forward-WORD-end
-        "gf" 'evil-backward-word-end
-        "gF" 'evil-backward-WORD-end
-        "gt" 'find-file-at-point
-        "gT" 'evil-find-file-at-point-with-line)
-      (cond
-       ((eq evil-colemak-basics-char-jump-commands nil)
-        (evil-define-key '(motion normal visual) keymap
-            "t" 'evil-find-char
-            "T" 'evil-find-char-backward
-            "j" 'evil-find-char-to
-            "J" 'evil-find-char-to-backward))
-       ((eq evil-colemak-basics-char-jump-commands 'evil-snipe)
-        ;; XXX https://github.com/hlissner/evil-snipe/issues/46
-        (evil-snipe-def 1 inclusive "t" "T")
-        (evil-snipe-def 1 exclusive "j" "J")
-        (evil-define-key '(motion normal visual) keymap
-          "t" 'evil-snipe-t
-          "T" 'evil-snipe-T
-          "j" 'evil-snipe-j
-          "J" 'evil-snipe-J))
-       (t (user-error "Invalid evil-colemak-basics-char-jump-commands configuration"))))
+      "o" 'evil-forward-char)
     keymap))
 
 (defvar evil-colemak-basics-keymap
@@ -143,3 +104,4 @@ rotated; see evil-colemak-basics-rotate-t-f-j."
 (provide 'evil-colemak-basics)
 
 ;;; evil-colemak-basics.el ends here
+
